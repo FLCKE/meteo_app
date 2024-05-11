@@ -1,0 +1,72 @@
+<div class="vw-100 ps-5  " style="background-color: rgba(255, 255, 255, 0.5);">
+    <div class="row mx-5 mt-5 text-uppercase">
+        <div class="col  text-center ">
+            <span class="fs-2">User information</span>
+
+        </div>
+    </div>
+    <div class="row px-5 pt-2 d-flex">
+        <div class="col w-50 p-5 m-auto shadow ">
+            <div class="d-flex fs-5 justify-content-between ">
+                <div class="d-flex ">
+                    <h4 class="me-2">User Firstname :</h4>
+                    <span *ngIf="userData">{{userData.user_name}} </span>
+                </div>
+                <div class="d-flex ">
+                    <h4 class="me-2">User Email :</h4>
+                    <span *ngIf="userData">{{userData.user_email}}</span>
+                </div>
+                <!-- <div class="d-flex fs-5 "> -->
+            </div>
+            <div class="d-flex fs-5 justify-content-between my-3 ">
+
+                <div class="d-flex">
+                    <h4 class="me-2">Password:</h4>
+                    <span *ngIf="userData">****************</span>
+                </div>
+                <!-- <div class="d-flex fs-5 "> -->
+            </div>
+            <div class="text-center mt-4 pt-2 d-flex justify-content-around">
+
+                <button type="button" class="btn btn-primary m-auto" data-bs-toggle="modal"
+                    data-bs-target="#updateBlock">
+                    Modifier
+                </button>
+                <button type="button" class="btn btn-primary m-auto" (click)="logout()">
+                    Deconnecter
+                </button>
+
+            </div>
+            <div class="modal fade" id="updateBlock" tabindex="-1" aria-labelledby="exampleModalLabel2"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <form action="" method="post">
+                                <div class="d-flex justify-content-between my-3">
+                                    <input class="form-control me-1" id="user_name" type="text"
+                                        value="{{userData.user_name}}">
+                                    <input class="form-control me-1" id="email" type="email"
+                                        value="{{userData.user_email}}">
+                                    <input class="form-control me-1" type="text" id="password"
+                                        placeholder="Entrez votre mot de passe actuel">
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        (click)="updateUser()">Modifier</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

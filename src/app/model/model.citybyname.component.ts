@@ -2,7 +2,7 @@
 
 export interface CityByNameItemComponent {
         nom: String,
-        code: String,
+        code: string,
         _scrore: Number,
         departement: { code: String, nom: String }
 }

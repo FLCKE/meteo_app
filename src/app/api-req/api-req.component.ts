@@ -1,70 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CityComponent } from '../model/model.city.component';
+import { CityComponent,CityComponent2 } from '../model/model.city.component';
 import { PrevisionWeekComponent } from '../model/model.prevision.component';
 import { PrevisionDayComponent } from '../model/model.prevision.component';
 import { PrevisionDayByHourComponent } from '../model/model.prevision.component';
 import { DatePipe } from '@angular/common';
 import { WEATHER } from '../model/model.weather';
+import { Observable } from 'rxjs';
+import { SearchBarreComponent } from '../search-barre/search-barre.component';
 @Component({
   selector: 'app-api-req',
   templateUrl: './api-req.component.html',
   styleUrl: './api-req.component.css'
 })
 export class ApiReqComponent implements OnInit {
-  public weekPrevision !: PrevisionWeekComponent;
-  public dayPrevision !: PrevisionDayComponent;
-  public dayByHourPrevision !: PrevisionDayByHourComponent;
-  public cityname="";
-  public weather=WEATHER;
+  public weekPrevision: PrevisionWeekComponent | null = null;
+  public dayPrevision: PrevisionDayComponent | null = null;
+  public dayByHourPrevision: PrevisionDayByHourComponent | null = null;
+  public cityname = "";
+  public weather = WEATHER;
+  public insee: string = "0";
+
   constructor(private clientHttp: HttpClient, public datePipe: DatePipe) {
   }
   ngOnInit(): void {
-    this.getInsee();
-    if (this.weekPrevision) {
-      console.log(this.weekPrevision.city);
+
+    if (this.insee=="0"){
+      this.getInsee();
     }
 
   }
+
   /**
    * get_weather
    */
-  public getWeatherOfWeek(insee: string) {
+  public getWeatherOfWeek(insee: string): Observable<PrevisionWeekComponent> {
     let getUrl = `https://api.meteo-concept.com/api/forecast/daily?token=e333e524e5cbea313aae8d366dd00057cd40afa0aa967498a87ef7e728988ee9&insee=${insee}`;
 
-    this.clientHttp.get<PrevisionWeekComponent>(getUrl).subscribe(result => {
-      this.weekPrevision = result;
-      console.log(this.weekPrevision);
-    });
+    return this.clientHttp.get<PrevisionWeekComponent>(getUrl);
   }
-  public getWeatherOfDayByHour(insee: string) {
+  public getWeatherOfDayByHour(insee: string): Observable<PrevisionDayByHourComponent> {
     let getUrl = `https://api.meteo-concept.com/api/forecast/nextHours?token=e333e524e5cbea313aae8d366dd00057cd40afa0aa967498a87ef7e728988ee9&insee=${insee}`;
 
-    this.clientHttp.get<PrevisionDayByHourComponent>(getUrl).subscribe(result => {
-      this.dayByHourPrevision = result;
-      console.log(this.dayByHourPrevision);
-    });
+    return this.clientHttp.get<PrevisionDayByHourComponent>(getUrl);
   }
-  public getWeatherOfDay(insee: string) {
+  public getWeatherOfDay(insee: string): Observable<PrevisionDayComponent> {
     let getUrl = `https://api.meteo-concept.com/api/forecast/daily/0?token=e333e524e5cbea313aae8d366dd00057cd40afa0aa967498a87ef7e728988ee9&insee=${insee}`;
 
-    this.clientHttp.get<PrevisionDayComponent>(getUrl).subscribe(result => {
-      this.dayPrevision = result;
-      console.log(this.dayPrevision.forecast);
-    });
+    // return this.clientHttp.get<PrevisionDayComponent>(getUrl).subscribe(result => {
+    //   this.dayPrevision = result;
+    //   // console.log(this.dayPrevision.forecast);
+
+
+    // });
+    return this.clientHttp.get<PrevisionDayComponent>(getUrl);
   }
   public getInsee() {
     this.getPosition().then((pos: any) => {
       let getUrl = `https://api.meteo-concept.com/api/location/city?token=e333e524e5cbea313aae8d366dd00057cd40afa0aa967498a87ef7e728988ee9&latlng=${pos.lat},${pos.lng}`;
 
-      let result = this.clientHttp.get<CityComponent>(getUrl).subscribe(result => {
-        console.log(result.city.name);
-        this.cityname=result.city.name;
-        this.getWeatherOfWeek(result.city.insee);
-        this.getWeatherOfDay(result.city.insee);
-        this.getWeatherOfDayByHour(result.city.insee);
+      this.clientHttp.get<CityComponent2>(getUrl).subscribe(result => {
+        var city:CityComponent2 =result;
+        this.getweather(city.city.insee);
       });
-      // console.log(`Positon: ${pos.lng} ${pos.lat} ${pos.acc} `);
     });
 
   }
@@ -90,5 +88,29 @@ export class ApiReqComponent implements OnInit {
         }
       }
     });
+  }
+  /**
+   * getweather
+   */
+  public getweather(insee: string) {
+    this.getWeatherOfWeek(insee).subscribe((result) => {
+      this.weekPrevision = result;
+    });
+    this.getWeatherOfDay(insee).subscribe((result) => {
+      this.dayPrevision = result;
+    });
+    this.getWeatherOfDayByHour(insee).subscribe((result) => {
+      this.dayByHourPrevision = result;
+    });
+  }
+  /**
+   * receve
+  */
+  public receve(insee: string) {
+    this.dayPrevision = null;
+    this.dayByHourPrevision = null;
+    this.weekPrevision = null;
+    this.getweather(insee);
+
   }
 }

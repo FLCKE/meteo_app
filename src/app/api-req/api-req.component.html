@@ -1,3 +1,7 @@
+<app-search-barre (messageEnvoye)= "receve($event) "></app-search-barre>
+<!-- <div *ngIf="stateInsee">
+    <p>ajour</p>
+</div> -->
 <section class="row p-5 container-fluid text-white"
     *ngIf="weekPrevision && dayPrevision && dayByHourPrevision ; else elseblock">
 
@@ -14,7 +18,7 @@
     </div>
     <div class="col mx-2 text-center border rounded " style="background-color: rgba(255, 255, 255, 0.5);">
         <h5 class="mt-3">
-            Position actuelle: <br> {{cityname}}
+            Position actuelle: <br> {{dayPrevision.city.name}}
         </h5>
         <div *ngIf="dayPrevision">
             <h1 style="font-size:5rem;" class="my-5"> {{(dayPrevision.forecast.tmin+dayPrevision.forecast.tmax)/2}} °C

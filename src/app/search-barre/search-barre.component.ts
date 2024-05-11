@@ -1,24 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CityByNameItemComponent } from '../model/model.citybyname.component';
-
+import { ApiReqComponent } from '../api-req/api-req.component';
 
 @Component({
   selector: 'app-search-barre',
   templateUrl: './search-barre.component.html',
   styleUrl: './search-barre.component.css'
 })
-export class SearchBarreComponent implements OnInit {
-  constructor(private http: HttpClient) { }
+export class SearchBarreComponent  {
+  @Output() messageEnvoye = new EventEmitter<string>();
+  constructor(private http: HttpClient,private apiReq:ApiReqComponent) { }
   CityData: CityByNameItemComponent[] = [];
-
+  
   stateName: string = "";
-  stateInsee: number = 0;
-  ngOnInit(): void {
-    // var stateName:HTMLElement|null =document.getElementById("stateName");
+  public stateInsee:  string="*****";
+  
 
-    // this.getDataByCityName(stateName);
-  }
   /**
    * getDataByCityName
   */
@@ -26,6 +24,7 @@ export class SearchBarreComponent implements OnInit {
     let reqUrl = `https://geo.api.gouv.fr/communes?nom=${name}&fields=departement&boost=population&limit=10`;
     this.http.get<CityByNameItemComponent[]>(reqUrl).subscribe(result => {
       this.CityData = result;
+      this.setInsee(this.CityData)
       console.log(this.CityData);
     })
 
@@ -34,9 +33,24 @@ export class SearchBarreComponent implements OnInit {
    * setInsee
  code : number  */
   public setInsee(code: any) {
-    console.log("fffffffffffff");
     this.stateInsee = code;
-    console.log(this.stateInsee);
+  }
+  public getInseeOfState(name: string) {
+    let url = 'https://geo.api.gouv.fr/communes?nom=' + name + '&fields=departement&boost=population&limit=1'
+    this.http.get<CityByNameItemComponent[]>(url).subscribe((next) => {
+      this.stateInsee = next[0].code;
+      console.log(this.stateInsee);
+    });
+    
+  }
+  /**
+   *  search_weather
+  
+  */
+ public  search_weather() {
+   
+   this.messageEnvoye.emit(this.stateInsee);
+    
   }
 
 }

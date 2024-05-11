@@ -1,0 +1,28 @@
+<div class="d-flex bg-dark-subtle vh-100 vw-100" >
+    <div class="m-auto bg-black rounded-2 ">
+        <div class="text-center">
+            <img src="../../assets/logo.png" alt="Logo" style="width: 80px; height:60px">
+        </div>
+        <div class="d-flex pb-2" style="width: 45vh; ">
+            <div class="mx-auto">
+                <form action="" method="post">
+                    <input type="email" class="d-block my-2 rounded-2 border-0" placeholder="Email..." id="email">
+                    <input type="text" class="d-block my-2 rounded-2 border-0" placeholder="Username..." id="user_name">
+                    <input type="password" class="d-block my-2 rounded-2 border-0" placeholder="Password..."
+                        id="password">
+                    <div class="d-flex justify-content-center p-2">
+                        <button type="button" class="btn btn-outline-light" id="btnValide"
+                            (click)="addUser()">Inscription</button>
+                    </div>
+                    <div class="d-flex justify-content-center px-4">
+                        <p class="text-white" style="font-size: 10px;">Vous aviez déjà un compte? <a
+                                [routerLink]="['/login']" class="text-danger d-flex justify-content-center">
+                                Connectez-vous</a></p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="./inscription.component.ts"></script>

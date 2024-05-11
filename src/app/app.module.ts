@@ -8,6 +8,11 @@ import { SearchBarreComponent } from './search-barre/search-barre.component';
 import { GetWeatherComponent } from './get-weather/get-weather.component';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ConnexionComponent } from './connexion/connexion.component';
+import { InscriptionComponent } from './inscription/inscription.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ProfilComponent } from './profil/profil.component';
+import { FavorisComponent } from './favoris/favoris.component';
 // import { CityComponent } from './model/model.city.component';
 @NgModule({
   declarations: [
@@ -15,6 +20,11 @@ import { DatePipe } from '@angular/common';
     ApiReqComponent,
     SearchBarreComponent,
     GetWeatherComponent,
+    ConnexionComponent,
+    InscriptionComponent,
+    NavbarComponent,
+    ProfilComponent,
+    FavorisComponent,
   ],
   imports: [
     BrowserModule,

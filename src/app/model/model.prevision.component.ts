@@ -1,6 +1,6 @@
 import { CityComponent } from "./model.city.component";
 import { ForcastComponent } from "./model.forcastWeather"
-import { ForcastDailyComponent} from "./model.forecastDaily.component";
+import { ForcastDailyComponent } from "./model.forecastDaily.component";
 export interface PrevisionWeekComponent {
     city: CityComponent;
     update: Date;
