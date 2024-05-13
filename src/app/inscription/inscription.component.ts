@@ -26,7 +26,6 @@ export class InscriptionComponent {
 
     }
   if(newUserData){
-
     this.apiservice.addUser(newUserData).subscribe({
       next: (result) => {
         this.router.navigateByUrl('/login');
