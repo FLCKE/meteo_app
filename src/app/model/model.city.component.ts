@@ -11,7 +11,7 @@ export interface CityComponent {
 }
 //Dû a une erreur dans le code qui refuse d'acceder a la valeur de la liste
 export interface CityComponent2 {
-        city:{
+        city: {
 
                 country: string,
                 insee: string,
@@ -21,5 +21,9 @@ export interface CityComponent2 {
                 longitude: Number,
                 altitude: Number,
         }
-                
+
+}
+export interface cities {
+        code: string,
+        nom: string,
 }
