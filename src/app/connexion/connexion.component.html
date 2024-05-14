@@ -1,29 +1,21 @@
-<div class="d-flex bg-dark-subtle vh-100 vw-100">
-    <div class="m-auto bg-black rounded-2 ">
-        <div class="text-center">
-            <img src="../../assets/logo.png" alt="Logo" style="width: 80px; height:60px">
-        </div>
-        <div class="alert alert-danger d-block mx-3  " role="alert" *ngIf="errorMessage">
+<div class="component-container">
+    <div class="login-container">
+        <p class="form-title">Connectez-vous à votre compte</p>
+        <div class="alert alert-danger d-block mx-3" role="alert" *ngIf="errorMessage">
             <i class="bi bi-exclamation-triangle-fill"></i>
-            {{errorMessage}}
+            {{ errorMessage }}
         </div>
-        <div class="d-flex pb-2" style="width: 45vh; ">
-            <div class="mx-auto">
+        <div class="form-container">
+            <div class="info-container">
                 <form action="" method="get" class="px-center">
-                    <input type="email" class="d-block my-2  rounded-1 border-0 " placeholder="Email..." id="email">
-                    <input type="password" class="d-block my-2 rounded-2 border-0" placeholder="Password..."
-                        id="password">
-                    <div class="d-flex justify-content-center p-2">
-                        <button type="button" class="btn btn-outline-light" (click)="login()">Connexion</button>
-                    </div>
-                    <div class="d-flex justify-content-center px-4">
-                        <p class="text-white" style="font-size: 10px;">Vous n'aviez pas de compte? <a
-                                [routerLink]="['/suscribe']" class="text-danger d-flex justify-content-center">Inscrivez
-                                vous</a></p>
-                    </div>
+                    <input type="email" class="input" placeholder="Email..." id="email">
+                    <input type="password" class="input" placeholder="Mot de passe..." id="password">
+                        <button type="button" class="btn-login" (click)="login()">Connexion</button>
+                        <p class="messageSignIn">Vous n'avez pas de compte ?
+                            <a [routerLink]="['/suscribe']"> Inscrivez-vous</a>
+                        </p>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
