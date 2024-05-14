@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CityComponent,CityComponent2 } from '../model/model.city.component';
+import { CityComponent, CityComponent2, cities } from '../model/model.city.component';
 import { PrevisionWeekComponent } from '../model/model.prevision.component';
 import { PrevisionDayComponent } from '../model/model.prevision.component';
 import { PrevisionDayByHourComponent } from '../model/model.prevision.component';
@@ -25,7 +25,7 @@ export class ApiReqComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    if (this.insee=="0"){
+    if (this.insee == "0") {
       this.getInsee();
     }
 
@@ -57,11 +57,12 @@ export class ApiReqComponent implements OnInit {
   }
   public getInsee() {
     this.getPosition().then((pos: any) => {
-      let getUrl = `https://api.meteo-concept.com/api/location/city?token=e333e524e5cbea313aae8d366dd00057cd40afa0aa967498a87ef7e728988ee9&latlng=${pos.lat},${pos.lng}`;
+      let getUrl = `https://geo.api.gouv.fr/communes?lat=${pos.lat}&lon=${pos.lng}&fields=code`;
 
-      this.clientHttp.get<CityComponent2>(getUrl).subscribe(result => {
-        var city:CityComponent2 =result;
-        this.getweather(city.city.insee);
+      this.clientHttp.get<cities[]>(getUrl).subscribe(result => {
+        var city: cities[] = result;
+        // console.log(city[0].code);
+        this.getweather(city[0].code);
       });
     });
 
@@ -80,7 +81,7 @@ export class ApiReqComponent implements OnInit {
 
           navigator.geolocation.getCurrentPosition(resp => {
 
-            resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude, acc: resp.coords.accuracy, });
+            resolve({ lng: resp.coords.longitude, lat: resp.coords.latitude });
           },
             err => {
               reject(err);
