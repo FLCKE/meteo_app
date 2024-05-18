@@ -1,25 +1,28 @@
 <div class="container-fluid component-container py-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-6">
-            <div class="card login-container p-4 shadow-sm">
-                <p class="form-title text-center fs-4">Créer votre compte</p>
-                <div class="form-container">
-                    <div class="info-container">
-                        <form action="" method="post" class="px-3">
-                            <div class="mb-3">
+    <!-- Conteneur principal -->
+    <div class="row justify-content-center"><!-- Ligne pour aligner au centre -->
+        <div class="col-12 col-md-8 col-lg-6"><!-- Colonne pour les tailles d'écran -->
+            <div class="card login-container p-4 shadow-sm"><!-- Carte de connexion -->
+                <p class="form-title text-center fs-4">Créer votre compte</p><!-- Titre du formulaire -->
+                <div class="form-container"><!-- Conteneur du formulaire -->
+                    <div class="info-container"><!-- Conteneur des informations -->
+                        <form action="" method="post" class="px-3"><!-- Formulaire -->
+                            <div class="mb-3"><!-- Champ pour l'email -->
                                 <input type="email" class="form-control" placeholder="Email..." id="email">
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3"><!-- Champ pour le nom d'utilisateur -->
                                 <input type="text" class="form-control" placeholder="Username..." id="user_name">
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3"><!-- Champ pour le mot de passe -->
                                 <input type="password" class="form-control" placeholder="Password..." id="password">
                             </div>
-                            <div class="d-grid mt-3">
+                            <div class="d-grid mt-3"><!-- Bouton d'inscription -->
                                 <button type="button" class="btn btn-primary btn-signIn" id="btnValide" (click)="addUser()">Inscription</button>
                             </div>
-                            <p class="text-center mt-3 messageSignIn">Vous avez déjà un compte ?
-                                <a [routerLink]="['/login']">Connectez-vous</a>
+                            <p class="text-center mt-3 messageSignIn">
+                                Vous avez déjà un compte ?
+                                <!-- Message d'action -->
+                                <a [routerLink]="['/login']">Connectez-vous</a> <!-- lien vers la page de connexion -->
                             </p>
                         </form>
                     </div>

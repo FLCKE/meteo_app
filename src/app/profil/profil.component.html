@@ -1,28 +1,36 @@
 <section class="mx-3">
+    <!-- Entête de la section -->
     <div class="ps-3 bg-white bg-opacity-50 py-1 mt-5">
+        <!-- Titre de la section -->
         <div class="row mx-3 mt-5 text-uppercase">
             <div class="col text-center">
                 <span class="fs-2 fw-bold">User information</span>
             </div>
         </div>
+        <!-- Contenu de la section -->
         <div class="row px-3 pt-2 d-flex">
             <div class="col-12 col-md-10 col-lg-8 p-4 m-auto">
+                <!-- Informations sur l'utilisateur -->
                 <div class="d-flex flex-column flex-md-row fs-5 justify-content-between mb-3">
+                    <!-- Nom d'utilisateur -->
                     <div class="d-flex mb-3 mb-md-0">
                         <h4 class="me-2">User Firstname:</h4>
                         <span *ngIf="userData">{{userData.user_name}}</span>
                     </div>
+                    <!-- Adresse e-mail de l'utilisateur -->
                     <div class="d-flex mb-3 mb-md-0">
                         <h4 class="me-2">User Email:</h4>
                         <span *ngIf="userData">{{userData.user_email}}</span>
                     </div>
                 </div>
+                <!-- Bouton de modification du mot de passe -->
                 <div class="d-flex flex-column flex-md-row fs-5 justify-content-between mb-3">
                     <div class="d-flex">
                         <h4 class="me-2">Password:</h4>
                         <span *ngIf="userData">****************</span>
                     </div>
                 </div>
+                <!-- Boutons d'action -->
                 <div class="text-center mt-4 pt-2 d-flex justify-content-around">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateBlock">
                         Modifier
@@ -31,16 +39,19 @@
                         Deconnecter
                     </button>
                 </div>
+                <!-- Fenêtre modale de mise à jour des informations -->
                 <div class="modal fade" id="updateBlock" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <form action="" method="post">
+                                    <!-- Champs de modification des informations -->
                                     <div class="d-flex flex-column">
                                         <input class="form-control mb-3" id="user_name" type="text" value="{{userData.user_name}}">
                                         <input class="form-control mb-3" id="email" type="email" value="{{userData.user_email}}">
                                         <input class="form-control mb-3" type="text" id="password" placeholder="Entrez votre mot de passe actuel">
                                     </div>
+                                    <!-- Boutons de la fenêtre modale -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-primary" (click)="updateUser()">Modifier</button>
