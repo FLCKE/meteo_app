@@ -1,20 +1,30 @@
-<div class="component-container">
-    <div class="login-container">
-        <p class="form-title">Connectez-vous à votre compte</p>
-        <div class="alert alert-danger d-block mx-3" role="alert" *ngIf="errorMessage">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            {{ errorMessage }}
-        </div>
-        <div class="form-container">
-            <div class="info-container">
-                <form action="" method="get" class="px-center">
-                    <input type="email" class="input" placeholder="Email..." id="email">
-                    <input type="password" class="input" placeholder="Mot de passe..." id="password">
-                        <button type="button" class="btn-login" (click)="login()">Connexion</button>
-                        <p class="messageSignIn">Vous n'avez pas de compte ?
-                            <a [routerLink]="['/suscribe']"> Inscrivez-vous</a>
-                        </p>
-                </form>
+<div class="container-fluid component-container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card login-container p-4 shadow-sm">
+                <p class="form-title text-center fs-4">Connectez-vous à votre compte</p>
+                <div class="alert alert-danger mx-3" role="alert" *ngIf="errorMessage">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    {{ errorMessage }}
+                </div>
+                <div class="form-container">
+                    <div class="info-container">
+                        <form action="" method="get" class="px-3">
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email..." id="email">
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="Mot de passe..." id="password">
+                            </div>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary btn-login" (click)="login()">Connexion</button>
+                            </div>
+                            <p class="text-center mt-3 messageSignIn">Vous n'avez pas de compte ?
+                                <a [routerLink]="['/suscribe']">Inscrivez-vous</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
