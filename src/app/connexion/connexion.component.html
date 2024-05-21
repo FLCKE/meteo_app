@@ -1,29 +1,50 @@
-<div class="d-flex bg-dark-subtle vh-100 vw-100">
-    <div class="m-auto bg-black rounded-2 ">
-        <div class="text-center">
-            <img src="../../assets/logo.png" alt="Logo" style="width: 80px; height:60px">
-        </div>
-        <div class="alert alert-danger d-block mx-3  " role="alert" *ngIf="errorMessage">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            {{errorMessage}}
-        </div>
-        <div class="d-flex pb-2" style="width: 45vh; ">
-            <div class="mx-auto">
-                <form action="" method="get" class="px-center">
-                    <input type="email" class="d-block my-2  rounded-1 border-0 " placeholder="Email..." id="email">
-                    <input type="password" class="d-block my-2 rounded-2 border-0" placeholder="Password..."
-                        id="password">
-                    <div class="d-flex justify-content-center p-2">
-                        <button type="button" class="btn btn-outline-light" (click)="login()">Connexion</button>
+<div class="container-fluid component-container py-5">
+    <!-- Conteneur principal, avec des classes Bootstrap pour la mise en page fluide et le padding vertical -->
+    <div class="row justify-content-center">
+        <!-- Ligne Bootstrap pour centrer le contenu horizontalement -->
+        <div class="col-12 col-md-8 col-lg-6">
+            <!-- Colonne qui s'ajuste selon la taille de l'écran, prenant toute la largeur sur petits écrans, 8/12 sur moyens et 6/12 sur grands écrans -->
+            <div class="card login-container p-4 shadow-sm">
+                <!-- Carte contenant le formulaire de connexion, avec padding et ombre -->
+                <p class="form-title text-center fs-4">Connectez-vous à votre compte</p>
+                <!-- Titre du formulaire, centré et avec une taille de police ajustée -->
+                <div class="alert alert-danger mx-3" role="alert" *ngIf="errorMessage">
+                    <!-- Alerte d'erreur, affichée seulement si `errorMessage` est défini -->
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                    <!-- Icône d'alerte Bootstrap Icons -->
+                    {{ errorMessage }}
+                    <!-- Message d'erreur -->
+                </div>
+                <div class="form-container">
+                    <!-- Conteneur du formulaire -->
+                    <div class="info-container">
+                        <!-- Conteneur des champs d'information -->
+                        <form action="" method="get" class="px-3">
+                            <!-- Formulaire avec padding horizontal -->
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email..." id="email">
+                                <!-- Champ de saisie pour l'email avec classe Bootstrap pour le style -->
+                            </div>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" placeholder="Mot de passe..." id="password">
+                                <!-- Champ de saisie pour le mot de passe avec classe Bootstrap pour le style -->
+                            </div>
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary btn-login" (click)="login()">
+                                    Connexion
+                                </button>
+                                <!-- Bouton de connexion avec gestionnaire d'événements Angular pour appeler la méthode `login` -->
+                            </div>
+                            <p class="text-center mt-3 messageSignIn">
+                                <!-- Paragraphe avec message d'incitation à s'inscrire, centré avec marge en haut -->
+                                Vous n'avez pas de compte ?
+                                <a [routerLink]="['/suscribe']">Inscrivez-vous</a>
+                                <!-- Lien vers la page d'inscription, utilisant Angular Router -->
+                            </p>
+                        </form>
                     </div>
-                    <div class="d-flex justify-content-center px-4">
-                        <p class="text-white" style="font-size: 10px;">Vous n'aviez pas de compte? <a
-                                [routerLink]="['/suscribe']" class="text-danger d-flex justify-content-center">Inscrivez
-                                vous</a></p>
-                    </div>
-                </form>
+                </div>
             </div>
-
         </div>
     </div>
 </div>

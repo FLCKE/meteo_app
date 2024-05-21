@@ -1,12 +1,8 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
-// const mysql = require('mysql2');
 const bcrypt = require("bcrypt");
-const { throwError, last } = require('rxjs');
-
 const app = express();
-
 app.use(cors());
 app.use(bodyparser.json());
 
@@ -20,11 +16,11 @@ const db = new sqlite3.Database('database.sqlite', (err) => {
         console.log('Connexion à la base de données réussie');
     }
 });
-
+//ouvrir le serveur de l'api sur le port 3306
 app.listen(3306, () => {
     console.log("serve running to http://localhost:3306")
 })
-
+//recupérer es informations de l'utilisateur
 app.get('/user-by-id', (req, resp) => {
     let requete = "SELECT * FROM `user` WHERE id=" + req.query.userId;
     db.each(requete, (err, result) => {
@@ -43,6 +39,7 @@ app.get('/user-by-id', (req, resp) => {
         }
     })
 })
+//se connecter au compte en utilisant le mail et le mod de passe 
 app.get('/login', (req, resp) => {
     console.log('fffffffffffffffffffffffffffffff');
     let email = req.query.email;
@@ -77,6 +74,7 @@ app.get('/login', (req, resp) => {
         }
     })
 })
+//ajouter un nouveau utilisateur 
 app.post('/add-user', (req, res) => {
     const data = req.body;
     console.log(data.user_password);
@@ -112,6 +110,7 @@ app.post('/add-user', (req, res) => {
     })
 
 })
+//mettre a jour les informations de utiisateur
 app.post('/update-user', (req, res) => {
     const data = req.body;
     let password = data.user_password;
@@ -148,6 +147,7 @@ app.post('/update-user', (req, res) => {
     })
 
 })
+//ajouter une nouvelle adresse
 app.post('/add_state', (req, res) => {
     console.log(req.body);
     const data = req.body;
@@ -193,6 +193,7 @@ app.post('/add_state', (req, res) => {
     //     }
     // });
 })
+//selectionner les adresse enregistrer par l'utilisateur
 app.get('/select_fav', (req, res) => {
     let user_id = req.query.user_id;
     console.log(user_id);
@@ -226,10 +227,12 @@ app.get('/select_fav', (req, res) => {
     }
     )
 })
+//hasher le mot de passe
 async function hashPassword(password) {
     var hashed = await bcrypt.hash(password, 10);
     return hashed;
 }
+//Comparer deux mots de passe (celui entrer par l'utilisateur et celui stocker dans la base de donnée)
 async function checkPassword(password, hashed) {
     var result = await bcrypt.compare(password, hashed);
     return result;

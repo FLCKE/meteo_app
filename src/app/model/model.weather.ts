@@ -1,7 +1,9 @@
+// Définition de l'interface Weather qui utilise un index numérique pour les codes météo
 export interface Weather {
-    [code: number]: string;
+    [code: number]: string;  // Un nombre (code météo) en tant qu'index avec une valeur correspondante en chaîne de caractères (description météo)
 }
 
+// Définition de la constante WEATHER qui utilise l'interface Weather
 export const WEATHER: Weather = {
     0: "Soleil",
     1: "Peu nuageux",

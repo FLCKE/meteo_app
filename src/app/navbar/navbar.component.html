@@ -1,29 +1,44 @@
 <section>
-    <nav class="navbar navbar-expand-md shadow ">
+    <!-- Barre de navigation Bootstrap avec ombre -->
+    <nav class="navbar navbar-expand-md shadow">
         <div class="container-fluid">
+            <!-- Logo de l'application (probablement dans le dossier 'assets') -->
+            <a href="#"><img src="assets/logo.png" alt="Logo E Meteo" id="logo" class="navbar-brand"></a>
+
+            <!-- Nom de l'application -->
             <a class="navbar-brand text-white" href="#">E-Météo</a>
-        </div>
-        <button class="navbar-toggler  " type="button" id="button_nav" data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarCollapse">
 
-            <ul class="navbar-nav ml-auto " *ngIf="!data">
-                <li class="nav-item    mx-3 text-center"> <a class="nav-link text-white"
-                        [routerLink]="['/suscribe']">Inscription</a></li>
-                <li class="nav-item     mx-3 text-center"> <a class="nav-link text-white"
-                        [routerLink]="['/login']">Connexion</a></li>
+            <!-- Bouton de basculement pour les écrans de taille réduite -->
+            <button class="navbar-toggler" type="button" id="button_nav" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            </ul>
-            <ul class="navbar-nav ml-auto " *ngIf="data">
-                <li class="nav-item    mx-3 text-center"> <a class="nav-link text-white"
-                        [routerLink]="['/favoris']">Favoris</a></li>
-                <li class="nav-item     mx-3 text-center"> <a class="nav-link text-white"
-                        [routerLink]="['/profil']">Profil</a></li>
+            <!-- Contenu de la barre de navigation collapsible -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!-- Menu à droite pour les utilisateurs non connectés -->
+                <ul class="navbar-nav ms-auto" *ngIf="!data">
+                    <li class="nav-item mx-3 text-center">
+                        <a class="nav-link text-white" [routerLink]="['/suscribe']">Inscription</a>
+                    </li>
+                    <li class="nav-item mx-3 text-center">
+                        <a class="nav-link text-white" [routerLink]="['/login']">Connexion</a>
+                    </li>
+                </ul>
 
-            </ul>
+                <!-- Menu à droite pour les utilisateurs connectés -->
+                <ul class="navbar-nav ms-auto" *ngIf="data">
+                    <li class="nav-item mx-3 text-center">
+                        <a class="nav-link text-white" [routerLink]="['/favoris']">Favoris</a>
+                    </li>
+                    <li class="nav-item mx-3 text-center">
+                        <a class="nav-link text-white" [routerLink]="['/profil']">Profil</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
+    <!-- Composant de barre de recherche (commenté ici) -->
     <!-- <app-search-barre></app-search-barre> -->
 </section>

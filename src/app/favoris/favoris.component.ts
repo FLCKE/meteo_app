@@ -5,86 +5,83 @@ import { BackendService } from '../back_api/backend.service';
 import { ApiReqComponent } from '../api-req/api-req.component';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-favoris',
   templateUrl: './favoris.component.html',
   styleUrl: './favoris.component.css'
 })
 export class FavorisComponent implements OnInit {
-  constructor(private http: HttpClient, private back: BackendService, private datepipe: DatePipe, private router:Router) { }
-  CityData: CityByNameItemComponent[] = [];
-  fav: any;
-  public api: ApiReqComponent = new ApiReqComponent(this.http, this.datepipe);
-  cityPredict: any[] = [null, null, null];
-  datas: any;
-  stateName: string = "";
-  index: number = 0;
-  public stateInsee: String = "xxxxx";
-  ngOnInit(): void {
-    this.getUserData();
-    this.back.selectFav(this.datas.user_id).subscribe((result) => {
-      this.fav = result;
-      // let i = 0;
-      console.log(this.fav.data[0]);
-      for (let i = 0; i < 3; i++) {
+  constructor(private http: HttpClient, private back: BackendService, private datepipe: DatePipe, private router: Router) { }
 
+  CityData: CityByNameItemComponent[] = []; // Stocke les données des villes recherchées
+  fav: any; // Stocke les favoris de l'utilisateur
+  public api: ApiReqComponent = new ApiReqComponent(this.http, this.datepipe); // Instance du composant ApiReqComponent
+  cityPredict: any[] = [null, null, null]; // Prévisions météo pour les villes favorites
+  datas: any; // Stocke les données de l'utilisateur
+  stateName: string = ""; // Nom de l'état ou de la ville
+  index: number = 0; // Index pour les favoris
+  public stateInsee: String = "xxxxx"; // Code INSEE de la ville
+
+  ngOnInit(): void {
+    this.getUserData(); // Récupère les données de l'utilisateur
+    this.back.selectFav(this.datas.user_id).subscribe((result) => {
+      this.fav = result; // Récupère les favoris de l'utilisateur
+      console.log(this.fav.data[0]);
+
+      for (let i = 0; i < 3; i++) {
         console.log(this.fav.data[0]["cp" + i]);
         if (this.fav.data[0]["cp" + i] == null) {
           this.cityPredict[i] = null;
-          // i++     
         } else {
           this.api.getWeatherOfDay(this.fav.data[0]["cp" + i]).subscribe((result) => {
-            this.cityPredict[i] = result;
-            // i++;
+            this.cityPredict[i] = result; // Stocke les prévisions météo pour chaque ville favorite
           });
         }
-        // Pour eviter les probléme de placement des information 
-
-
       }
       console.log(this.cityPredict);
-      //j'etais bloqué ici a caused'une mauvaise indexation des element du tableau donc a revoir une fois a la maison 
-      // j'arrive a ajouté a la base de donnée mais au mauvais endroit
-
-      // console.log(this.cityPredict[1].city.insee);
-      // console.log(this.cityPredict[2].city.insee);
-    })
+    });
   }
+
+  /**
+   * Récupère les données de l'utilisateur depuis le localStorage
+   */
   public getUserData() {
     if (typeof localStorage != 'undefined') {
-
       this.datas = localStorage.getItem("AuthUser");
       this.datas = JSON.parse(this.datas);
     }
   }
+
   /**
-   * set_index
+   * Définit l'index pour les favoris
    */
   public set_index(x: number) {
     this.index = x;
   }
+
   /**
-   * getDataByCityName
-  */
+   * Récupère les données des villes par nom
+   */
   public getDataByCityName(name: any) {
     let reqUrl = `https://geo.api.gouv.fr/communes?nom=${name}&fields=departement&boost=population&limit=10`;
     this.http.get<CityByNameItemComponent[]>(reqUrl).subscribe(result => {
-      this.CityData = result;
+      this.CityData = result; // Stocke les données des villes recherchées
       console.log(this.CityData);
-    })
-
+    });
   }
+
   /**
-   * setInsee
- code : number  */
+   * Définit le code INSEE de la ville sélectionnée
+   */
   public setInsee(code: any) {
-    console.log("fffffffffffff");
+    console.log("Code INSEE défini : ", code);
     this.stateInsee = code;
     console.log(this.stateInsee);
   }
 
   /**
-   * addFav
+   * Ajoute une ville aux favoris
    */
   public addFav(cp_id: number) {
     let data: any;
@@ -97,26 +94,23 @@ export class FavorisComponent implements OnInit {
       state: city.value,
       code: cp.value,
       user_Id: this.datas.user_id,
-    }
-
+    };
 
     console.log(data);
     this.back.addState(data, cp_id).subscribe((next) => {
-      console.log("success city added");
+      console.log("Ville ajoutée avec succès aux favoris");
       window.location.reload();
       this.router.navigateByUrl('/favoris');
-      
-    })
+    });
   }
+
   /**
-   * getInseeOfState
+   * Récupère le code INSEE de l'état ou de la ville par nom
    */
   public getInseeOfState(name: string) {
-
-    let url = 'https://geo.api.gouv.fr/communes?nom=' + name + '&fields=departement&boost=population&limit=1'
+    let url = 'https://geo.api.gouv.fr/communes?nom=' + name + '&fields=departement&boost=population&limit=1';
     this.http.get<CityByNameItemComponent[]>(url).subscribe((next) => {
-      this.stateInsee = next[0].code;
+      this.stateInsee = next[0].code; // Stocke le code INSEE de la ville recherchée
     });
-
   }
 }

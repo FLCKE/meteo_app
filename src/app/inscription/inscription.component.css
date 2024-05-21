@@ -1,0 +1,68 @@
+/* Styles pour le conteneur de connexion */
+.login-container {
+    margin: auto; /* Centre le conteneur horizontalement */
+    background-color: rgba(128, 128, 128, 0.5); /* Couleur de fond semi-transparente */
+    backdrop-filter: blur(2px); /* Effet de flou sur l'arrière-plan */
+    border-radius: 20px; /* Coins arrondis */
+    align-content: center; /* Centrage du contenu */
+    align-items: center; /* Centrage des éléments enfants */
+}
+
+/* Styles pour le bouton de connexion */
+.btn-login {
+    display: inline-block; /* Affichage en ligne */
+    font-weight: 400; /* Poids de la police */
+    vertical-align: middle; /* Alignement vertical */
+    cursor: pointer; /* Curseur de souris */
+    user-select: none; /* Interdiction de la sélection */
+    border: 1px solid transparent; /* Bordure transparente */
+    padding: 0.375rem 0.75rem; /* Rembourrage */
+    font-size: 1rem; /* Taille de la police */
+    line-height: 1.5; /* Hauteur de ligne */
+    border-radius: 0.25rem; /* Coins arrondis */
+    width: 250px; /* Largeur fixe */
+    color: #f8f9fa; /* Couleur du texte */
+    background-color: transparent; /* Couleur de fond transparente */
+    background-image: none; /* Pas d'image de fond */
+    border-color: #f8f9fa; /* Couleur de la bordure */
+    margin: 0 auto; /* Centre le bouton horizontalement */
+    margin-top: 2rem; /* Marge supérieure */
+    display: block; /* Affichage en bloc */
+}
+
+/* Styles au survol du bouton de connexion */
+.btn-login:hover {
+    color: #000000; /* Changement de couleur du texte */
+    background-color: #f8f9fa; /* Changement de couleur de fond */
+    background-image: none; /* Pas d'image de fond */
+    border-color: #f8f9fa; /* Changement de couleur de bordure */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Transition fluide */
+}
+
+/* Styles pour les alertes */
+.alert {
+    padding: 0.75rem 1.25rem; /* Rembourrage */
+    margin-top: 1rem; /* Marge supérieure */
+    margin-bottom: -1rem; /* Marge inférieure négative pour compenser */
+    border: 1px solid transparent; /* Bordure transparente */
+    border-radius: 0.25rem; /* Coins arrondis */
+}
+
+/* Styles pour l'alerte de danger */
+.alert-danger {
+    color: #721c24; /* Couleur du texte */
+    background-color: #f8d7da; /* Couleur de fond */
+    border-color: #f5c6cb; /* Couleur de la bordure */
+}
+
+/* Styles au survol des liens */
+a:hover {
+    text-decoration: none; /* Pas de soulignement au survol */
+}
+
+/* Styles pour le message de connexion */
+.messageSignIn {
+    margin-top: 0.8rem; /* Marge supérieure */
+    color: white; /* Couleur du texte */
+    font-size: 0.9rem; /* Taille de la police */
+}
